@@ -3,17 +3,17 @@ import { useEffect } from "react";
 import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 import { Users } from "lucide-react";
 import { useChatStore } from "../store/UseChatStore";
+import { useAuthStore } from "../store/UseAuthStore";
 
 const Sidebar = () => {
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
-
-  const { onlineUsers } = [];
+  const {onlineUsers}= useAuthStore();
 
   useEffect(() => {
     getUsers();
   }, [getUsers]);
 
- 
+
 
   if (isUsersLoading) return <SidebarSkeleton />;
 
@@ -25,7 +25,7 @@ const Sidebar = () => {
           <span className="font-medium hidden lg:block">Contacts</span>
         </div>
         {/* TODO: Online filter toggle */}
-        
+
       </div>
 
       <div className="overflow-y-auto w-full py-3">
